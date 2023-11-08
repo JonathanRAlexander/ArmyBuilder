@@ -6,10 +6,10 @@ static String armyName;
 static int armySize;
 		public static void main(String[] args)
 			{
-			//Thanks for the best class of the semester!!!!!!!
-				System.out.println("The army that you have created is a ranged army. This means that your army has very strong ranged weapons and its main\n strength lies in its ability to crush the enemy from far away. The strategy guide for this playstlye is as follows: Start battle rounds one \n and two wil the main goal of securing high up vantage points and places of cover, so that your armies ranged \n capabilities can be maximized.  This risk of wasting precious turns must be paid off in battle rounds three,\n four, five, and any extra added rounds. In these subsequent battle rounds, spend all resources on gunning\n the enemy down, preventing them from securing objective markers, whilst staying protected in cover. Once the\n enemy has been whittled down enough ( to around 50 - 65% of its original army size), bring your troops\n out of cover to secure the objective points and win the game. ");
-				
-				System.out.println("Hello worlds");
+			
+		
+			
+			
 				
 				Scanner userArmyNameInput = new Scanner(System.in);
 				System.out.println("What is the name of your Army? (NOT the faction)");
@@ -192,12 +192,25 @@ static int armySize;
 			
 			if(armyShootStrength >= 7)
 				{
-					System.out.println("The army that you have created is a ranged army. This means that your army has very strong ranged weapons and its main\n strength lies in its ability to crush the enemy from far away. The strategy guide for this playstlye is as follows: Start battle rounds one \n and two wil the main goal of securing high up vantage points and places of cover, so that your armies ranged \n capabilities can be maximized.  This risk of wasting precious turns must be paid off in battle rounds three,\n four, five, and any extra added rounds. In these subsequent battle rounds, spend all resources on gunning\n the enemy down, preventing them from securing objective markers, whilst staying protected in cover. Once the\n enemy has been whittled down enough ( to around 50 - 65% of its original army size), bring your troops\n out of cover to secure the objective points and win the game. ");
+				System.out.println("The army that you have created is a ranged army. This means that your army has very strong ranged weapons and its main\n strength lies in its ability to crush the enemy from far away. The strategy guide for this playstlye is as follows:\n Start battle rounds one and two wil the main goal of securing high up vantage points and places of cover, so that your armies ranged \n capabilities can be maximized.  This risk of wasting precious turns must be paid off in battle rounds three,\n four, five, and any extra added rounds. In these subsequent battle rounds, spend all resources on gunning\n the enemy down, preventing them from securing objective markers, whilst staying protected in cover. Once the\n enemy has been whittled down enough ( to around 50 - 65% of its original army size), bring your troops\n out of cover to secure the objective points and win the game.");
 				}
 			
-			
-			
+			if(armyMeleeStrength>=7)
+			{
+				System.out.println("The army you have created is a melee based army. This means that your army has strength in getting up close and personal\n with your enemy. With this army, you want to strategize throughout every battle round to get your units constantly in cover.\n Secure objective markers early and then when the enemy is close enough, charge in and destroy the enemy with your strong melee\n weapons.");
 			}
+			
+			if(woundCount>=5)
+			{
+				System.out.println("Your army is also an elite unit army. This means that you have units that are few in count but high in quality. Your strategy will\n be to maximize the strength of your few units in battle. place them in key strategic places and use your army's strength to take\n out the strong pieces of your opponent's army.");
+			}
+			
+			if(hordeCount>7)
+			{
+				System.out.println("Your army is also considered a 'horde army.' This means that your army has lots of strength in its numbers. The strategy with this\n type of army is to play extremely aggresive and overwhelm the enemy. Every battle round you should be pressing the attack in order\n to eventually trample the enemy army. This is a high risk / high reward army and can vary in success based on the type of army you\n are playing against.");
+			}
+			
+	}
 			
 				
 				
