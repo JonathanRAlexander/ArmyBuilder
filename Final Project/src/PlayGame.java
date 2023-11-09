@@ -4,21 +4,19 @@ public class PlayGame
 static String faction;
 static String armyName;
 static int armySize;
+static Scanner userStringInput = new Scanner(System.in);
+static Scanner userIntInput = new Scanner(System.in);
 		public static void main(String[] args)
 			{
-			
-		
-			
-			
 				
-				Scanner userArmyNameInput = new Scanner(System.in);
+				
 				System.out.println("What is the name of your Army? (NOT the faction)");
-				 armyName = userArmyNameInput.nextLine();
+				 armyName = userStringInput.nextLine();
 				
 				
-				Scanner userArmySizeInput = new Scanner(System.in);
+				
 				System.out.println("How many units are in your army?");
-				armySize = userArmySizeInput.nextInt();
+				armySize = userIntInput.nextInt();
 				
 				
 				askFaction();
@@ -34,10 +32,19 @@ static int armySize;
 					}
 				setFactions();
 				
-				displayArmy();
+				//displayArmy();
 				
-				displayPlaystyleBreakdown();
+				//displayPlaystyleBreakdown();
 				
+				System.out.println("Press enter to continue and track your armies wounds in a battle.");
+				String fake = userStringInput.nextLine();
+boolean playing  = true;
+				while(playing == true)
+					{
+						
+				displayWoundsAndModels();
+					
+					}
 			}
 		
 		
@@ -51,33 +58,33 @@ static int armySize;
 		public static void askUnit()
 		{
 			
-			Scanner userNameInput = new Scanner(System.in);
+			
 			System.out.println("What is the name of the unit");
-			String unitName = userNameInput.nextLine();
+			String unitName = userStringInput.nextLine();
 			
-			Scanner userTypeInput = new Scanner(System.in);
-			System.out.println("What is the type of the unit (warlord, character, infantry, vehicle, machine of war).");
-			String unitType = userTypeInput.nextLine();
+		
+			System.out.println("What is the type of the unit ('Warlord', 'Character', 'Infantry', 'Vehicle', 'Machine of War').");
+			String unitType =userStringInput .nextLine();
 			
-			Scanner userPowerRatingInput = new Scanner(System.in);
+	
 			System.out.println("What is the power rating of the unit");
-			int unitPowerRating = userPowerRatingInput.nextInt();
+			int unitPowerRating = userIntInput.nextInt();
 			
-			Scanner userModelNumber = new Scanner(System.in);
+			
 			System.out.println("How many models are the unit?");
-			int unitModelNumber = userModelNumber.nextInt();
+			int unitModelNumber = userIntInput.nextInt();
 			
-			Scanner userWounds = new Scanner(System.in);
+			
 			System.out.println("What is the wounds charcteristic of the unit?");
-			int unitWounds = userWounds.nextInt();
+			int unitWounds = userIntInput.nextInt();
 			
-			Scanner userHighestShoot = new Scanner(System.in);
+			
 			System.out.println("Input the highest strength characteristic out of all the strength characteristics of the ranged weapons that this unit is equipped with. (If the unit has no ranged weapons, input 0.");
-			int unitHighestShoot = userHighestShoot.nextInt();
+			int unitHighestShoot = userIntInput.nextInt();
 			
-			Scanner userHighestMelee = new Scanner(System.in);
+			
 			System.out.println("Input the highest strength characteristic out of all the strength characteristics of the melee weapons that this unit is equipped with. (If the unit has no melee weapons, input 0.");
-			int unitHighestMelee = userHighestMelee.nextInt();
+			int unitHighestMelee = userIntInput.nextInt();
 			
 			
 			Army.army.add(new Unit("", unitName, unitType, unitPowerRating,unitModelNumber, unitWounds, unitHighestShoot, unitHighestMelee));
@@ -160,6 +167,13 @@ static int armySize;
 		
 		public static void displayPlaystyleBreakdown()
 		{
+			
+			
+			
+			System.out.println("Would you like to see the strategic breakdown of your army?");
+			String answer = userStringInput.nextLine();
+			if(answer.equals("yes") || answer.equals("Yes"))
+				{
 			int armyShootStrength = 0;
 			int armyMeleeStrength = 0;
 			int woundCount = 0;
@@ -210,18 +224,61 @@ static int armySize;
 				System.out.println("Your army is also considered a 'horde army.' This means that your army has lots of strength in its numbers. The strategy with this\n type of army is to play extremely aggresive and overwhelm the enemy. Every battle round you should be pressing the attack in order\n to eventually trample the enemy army. This is a high risk / high reward army and can vary in success based on the type of army you\n are playing against.");
 			}
 			
+			else if(hordeCount<7 && woundCount <5 && armyMeleeStrength<7 && armyShootStrength<7)
+				{
+					System.out.println("Congratulations, you have made yourself a bland army with no significant strengths. You are probably awful at this game.");
+				}
+			
+				}
+			
+			else if(answer.equals("no") || answer.equals("No"))
+				{
+					System.out.println("Ok! Moving on.");
+				}
+	
+			
 	}
-			
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-			
 
+		public static void displayWoundsAndModels()
+		{
+			int j = 1;
+			for(int i = 0; i<armySize; i++)
+				{
+					if(Army.army.get(i).getModels()>1)
+						{
+					System.out.println(j +". " + Army.army.get(i).getName() + "  has "+ Army.army.get(i).getModels()+ " models left"  );
+						}
+					
+					else if(Army.army.get(i).getModels()==1)
+						{
+					System.out.println(j +". " + Army.army.get(i).getName() + "  has "+ Army.army.get(i).getWounds()+ " wounds left"  );
+						}
+					
+					System.out.println();
+					j++;
+					
+					 
+				}
+			
+			System.out.println("Which unit would you like to change? (input the number that the unit is next to in the list above.");
+			int unitChanged = userIntInput.nextInt();
+			unitChanged = unitChanged-1;
+			
+			System.out.println("How much? (Input a number and if you would like to subtract then input a negative number. For example, input '-1' to subtract one.)");
+			int changeValue = userIntInput.nextInt();
+			for(int i = 0; i<armySize; i++)
+			{
+			if(Army.army.get(i).getModels()>1)
+				{
+					Army.army.get(unitChanged).setModels(Army.army.get(unitChanged).getModels()+changeValue);
+				}
+			
+			else if(Army.army.get(i).getModels()==1)
+				{
+					Army.army.get(unitChanged).setWounds(Army.army.get(unitChanged).getWounds()+changeValue);
+				}
+			}
+		}
+				
+				
 	}
