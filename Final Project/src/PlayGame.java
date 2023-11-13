@@ -26,15 +26,15 @@ static Scanner userIntInput = new Scanner(System.in);
 				for(int i = 0; i<armySize; i++)
 					{
 						System.out.println();
-						System.out.println("Alright, next unit");
+						
 						System.out.println();
 						askUnit();
 					}
 				setFactions();
 				
-				//displayArmy();
+				displayArmy();
 				
-				//displayPlaystyleBreakdown();
+				displayPlaystyleBreakdown();
 				
 				System.out.println("Press enter to continue and track your armies wounds in a battle.");
 				String fake = userStringInput.nextLine();
@@ -244,14 +244,23 @@ boolean playing  = true;
 			int j = 1;
 			for(int i = 0; i<armySize; i++)
 				{
-					if(Army.army.get(i).getModels()>1)
+					if(Army.army.get(i).getType().equals("Infantry"))
 						{
-					System.out.println(j +". " + Army.army.get(i).getName() + "  has "+ Army.army.get(i).getModels()+ " models left"  );
+					System.out.println(j +". " + Army.army.get(i).getName() + " has "+ Army.army.get(i).getModels()+ " models left"  );
+						if(Army.army.get(i).getModels() == 0)
+							{
+								System.out.println("This unit has been completely destroyed.");
+							}
 						}
 					
-					else if(Army.army.get(i).getModels()==1)
+					
+					else if(Army.army.get(i).getType().equals("Character") || Army.army.get(i).getType().equals("Warlord")||Army.army.get(i).getType().equals("Vehicle") || Army.army.get(i).getType().equals("Machine of War"))
 						{
-					System.out.println(j +". " + Army.army.get(i).getName() + "  has "+ Army.army.get(i).getWounds()+ " wounds left"  );
+					System.out.println(j +". " + Army.army.get(i).getName() + " has "+ Army.army.get(i).getWounds()+ " wounds left"  );
+					if(Army.army.get(i).getWounds() == 0)
+						{
+							System.out.println("This unit has been completely destroyed.");
+						}
 						}
 					
 					System.out.println();
@@ -260,7 +269,7 @@ boolean playing  = true;
 					 
 				}
 			
-			System.out.println("Which unit would you like to change? (input the number that the unit is next to in the list above.");
+			System.out.println("Which unit would you like to change? (input the number that the unit is next to in the list above.)");
 			int unitChanged = userIntInput.nextInt();
 			unitChanged = unitChanged-1;
 			
@@ -268,12 +277,12 @@ boolean playing  = true;
 			int changeValue = userIntInput.nextInt();
 			for(int i = 0; i<armySize; i++)
 			{
-			if(Army.army.get(i).getModels()>1)
+			if(Army.army.get(i).getType().equals("Infantry"))
 				{
 					Army.army.get(unitChanged).setModels(Army.army.get(unitChanged).getModels()+changeValue);
 				}
 			
-			else if(Army.army.get(i).getModels()==1)
+			else if(Army.army.get(i).getType().equals("Character") || Army.army.get(i).getType().equals("Warlord")||Army.army.get(i).getType().equals("Vehicle") || Army.army.get(i).getType().equals("Machine of War"))
 				{
 					Army.army.get(unitChanged).setWounds(Army.army.get(unitChanged).getWounds()+changeValue);
 				}
