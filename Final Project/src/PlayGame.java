@@ -6,6 +6,7 @@ static String armyName;
 static int armySize;
 static Scanner userStringInput = new Scanner(System.in);
 static Scanner userIntInput = new Scanner(System.in);
+static int deaths;
 		public static void main(String[] args)
 			{
 				
@@ -38,13 +39,16 @@ static Scanner userIntInput = new Scanner(System.in);
 				
 				System.out.println("Press enter to continue and track your armies wounds in a battle.");
 				String fake = userStringInput.nextLine();
+				
 boolean playing  = true;
+
 				while(playing == true)
 					{
 						
 				displayWoundsAndModels();
 					
 					}
+				
 			}
 		
 		
@@ -250,6 +254,7 @@ boolean playing  = true;
 						if(Army.army.get(i).getModels() == 0)
 							{
 								System.out.println("This unit has been completely destroyed.");
+							
 							}
 						}
 					
@@ -260,6 +265,7 @@ boolean playing  = true;
 					if(Army.army.get(i).getWounds() == 0)
 						{
 							System.out.println("This unit has been completely destroyed.");
+							
 						}
 						}
 					
@@ -274,19 +280,20 @@ boolean playing  = true;
 			unitChanged = unitChanged-1;
 			
 			System.out.println("How much? (Input a number and if you would like to subtract then input a negative number. For example, input '-1' to subtract one.)");
+			System.out.println();
 			int changeValue = userIntInput.nextInt();
-			for(int i = 0; i<armySize; i++)
-			{
-			if(Army.army.get(i).getType().equals("Infantry"))
+			
+			if(Army.army.get(unitChanged).getType().equals("Infantry"))
 				{
 					Army.army.get(unitChanged).setModels(Army.army.get(unitChanged).getModels()+changeValue);
 				}
 			
-			else if(Army.army.get(i).getType().equals("Character") || Army.army.get(i).getType().equals("Warlord")||Army.army.get(i).getType().equals("Vehicle") || Army.army.get(i).getType().equals("Machine of War"))
+			else if(Army.army.get(unitChanged).getType().equals("Character") || Army.army.get(unitChanged).getType().equals("Warlord")||Army.army.get(unitChanged).getType().equals("Vehicle") || Army.army.get(unitChanged).getType().equals("Machine of War"))
 				{
 					Army.army.get(unitChanged).setWounds(Army.army.get(unitChanged).getWounds()+changeValue);
 				}
-			}
+			
+			
 		}
 				
 				
